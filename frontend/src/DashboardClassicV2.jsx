@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import DOMPurify from "dompurify"
+import { Link,} from "react-router-dom"
 
 const DashboardClassic = () => {
   const [title, setTitle] = useState("")
@@ -51,6 +52,8 @@ const DashboardClassic = () => {
     try {
       const res = await fetch(`${apiBase}/api/stats`)
       const data = await res.json()
+      console.log("stats",data);
+      
       setStats(data.stats || {})
       setRecentPosts(data.recentPosts || [])
     } catch (err) { console.error(err); }
@@ -237,17 +240,29 @@ const DashboardClassic = () => {
     }))
   }
 
+
+   const toggleMobileMenu = () => {
+    // Get the Mobile Menu Element
+    const mobileMenu = document.getElementById("mobileMenu");
+    //Id it has the hidden class ,remove it. otherwise , add it
+    if (mobileMenu.classList.contains("hidden")) {
+      mobileMenu.classList.remove("hidden");
+    } else {
+      mobileMenu.classList.add("hidden");
+    }
+  };
+
   const displayedPosts = recentPosts.slice(0, 3)
 
   return (
     <div className="min-h-screen bg-white">
       {/* Reddit-style Header */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex gap-6">
+      <div className="w-full px-2 sm:px-4 py-4 md:max-w-7xl md:mx-auto">
+        <div className="flex flex-col md:flex-row gap-6 w-full">
           {/* Main Content */}
-          <div className="flex-1">
+          <div className="flex-1 w-full">
             {/* Submit Form */}
-            <div className="bg-gray-50 border border-gray-300 rounded mb-6">
+            <div className="bg-gray-50 border border-gray-3 rounded mb-6 w-full">
               <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
                 <h2 className="font-bold text-sm">Submit a new AI blog post</h2>
               </div>
@@ -274,17 +289,17 @@ const DashboardClassic = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-  <button
-    onClick={handleGenerate}
-    disabled={loading || !title}
-    className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded text-sm font-medium"
-  >
-    {loading ? "generating..." : "generate"}
-  </button>
-  {rateLimitMsg && (
-    <div className="text-red-500 text-sm">{rateLimitMsg}</div>
-  )}
-</div>
+                    <button
+                      onClick={handleGenerate}
+                      disabled={loading || !title}
+                      className="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-2 rounded text-sm font-medium"
+                    >
+                      {loading ? "generating..." : "generate"}
+                    </button>
+                    {rateLimitMsg && (
+                      <div className="text-red-500 text-sm">{rateLimitMsg}</div>
+                    )}
+                  </div>
 
                 </div>
               </div>
@@ -368,7 +383,7 @@ const DashboardClassic = () => {
             </div>
 
             {/* Recent Posts - Limited to 3 with Collapsible */}
-            <div className="bg-gray-50 border border-gray-300 rounded mb-6">
+           <div className="bg-gray-50 border border-gray-300 rounded mb-6">
               <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
                 <h3 className="font-bold text-sm">Recent Posts (Latest 3)</h3>
               </div>
@@ -403,7 +418,7 @@ const DashboardClassic = () => {
                           {/* Post content */}
                           <div className="flex-1 p-3">
                             <div className="flex items-center justify-between">
-                              <h3 className="text-blue-600 hover:underline cursor-pointer font-medium mb-1">
+                              <h3 className="text-sm text-blue-600 hover:underline cursor-pointer font-medium mb-1">
                                 {post.title}
                               </h3>
                               <button
@@ -461,7 +476,7 @@ const DashboardClassic = () => {
                   <div className="flex items-center gap-3 text-xs">
                     {copyStatus && <span className="text-gray-600">{copyStatus}</span>}
                     <button
-                      onClick={handleCopyPlainText}
+                       onClick={handleCopyPlainText}
                       disabled={!output}
                       className="text-gray-600 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed underline"
                     >
@@ -529,107 +544,116 @@ const DashboardClassic = () => {
               </div>
             )}
           </div>
-
+          
           {/* Sidebar */}
+          
           <div className="w-80">
             {/* Subreddit Info */}
-            <div className="bg-white border border-gray-300 rounded mb-4">
-              <div className="bg-blue-500 text-white px-4 py-2 rounded-t">
-                <h3 className="font-bold text-sm">r/Sārathi</h3>
-              </div>
-              <div className="p-4">
-                <p className="text-sm text-gray-600 mb-3">Where Insight Meets Automation</p>
-                <div className="text-sm space-y-1 mb-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subscribers</span>
-                    <span className="font-bold">0</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Users here now</span>
-                    <span className="font-bold text-green-600">1</span>
-                  </div>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded mb-4">
+                <div className="bg-blue-500 text-white px-4 py-2 rounded-t">
+                  <h3 className="font-bold text-sm">r/Sārathi</h3>
                 </div>
-                <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm font-medium">
-                  + subscribe
-                </button>
+                <div className="p-4">
+                  <p className="text-sm text-gray-600 mb-3">Where Insight Meets Automation</p>
+                  <div className="text-sm space-y-1 mb-3">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Subscribers</span>
+                      <span className="font-bold">0</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Users here now</span>
+                      <span className="font-bold text-green-600">1</span>
+                    </div>
+                  </div>
+                  <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm font-medium">
+                    + subscribe
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Stats */}
-            <div className="bg-white border border-gray-300 rounded mb-4">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Today's Stats</h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Posts generated</span>
-                    <span className="font-bold">{stats.postsGenerated || 0}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Words created</span>
-                    <span className="font-bold">{stats.wordsCreated || 0}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Images found</span>
-                    <span className="font-bold">{stats.imagesFound || 0}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Content copied</span>
-                    <span className="font-bold">{stats.contentCopied || 0}</span>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded mb-4">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Today's Stats</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Posts generated</span>
+                      <span className="font-bold">{stats.postsGenerated || 0}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Words created</span>
+                      <span className="font-bold">{stats.wordsCreated || 0}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Images found</span>
+                      <span className="font-bold">{stats.imagesFound || 0}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Content copied</span>
+                      <span className="font-bold">{stats.contentCopied || 0}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Quick Links */}
-            <div className="bg-white border border-gray-300 rounded mb-4">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Quick Links</h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-2 text-sm">
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    • Submit Bugs
-                  </a>
-                  <a href="#" className="block text-blue-600 line-through">
-                    • Browse r/technology (UnderDevelopment)
-                  </a>
-                  <a href="#" className="block text-blue-600 line-through">
-                    • RSS feed settings
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    • Report
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    • Help & FAQ
-                  </a>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded mb-4">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Quick Links</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-2 text-sm">
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      • Submit Bugs
+                    </a>
+                    <a href="#" className="block text-blue-600 line-through">
+                      • Browse r/technology (UnderDevelopment)
+                    </a>
+                    <a href="#" className="block text-blue-600 line-through">
+                      • RSS feed settings
+                    </a>
+                    <Link to ="/bug-report" className="block text-blue-600 hover:underline">
+                      • Bug Report
+                    </Link>
+                    <Link to="/help-faq" className="block text-blue-600 hover:underline">
+                      • Help & FAQ
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Trending Subreddits */}
-            <div className="bg-white border border-gray-300 rounded">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Trending Subreddits</h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-2 text-sm">
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    r/MachineLearning
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    r/artificial
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    r/ChatGPT
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    r/singularity
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    r/OpenAI
-                  </a>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Trending Subreddits</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-2 text-sm">
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      r/MachineLearning
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      r/artificial
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      r/ChatGPT
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      r/singularity
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      r/OpenAI
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

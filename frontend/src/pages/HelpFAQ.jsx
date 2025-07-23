@@ -74,45 +74,49 @@ const HelpFAQ = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white  ">
       {/* Header */}
 
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex gap-6">
+      <div className="w-full px-2 sm:px-4 py-4">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Main Content */}
-          <div className="flex-1">
+          <div className="flex-1 w-full">
             {/* Page Header */}
-            <div className="bg-white border border-gray-300 rounded mb-6">
-              <div className="bg-blue-500 text-white px-4 py-3 rounded-t">
-                <h1 className="font-bold text-lg">Help & FAQ</h1>
-                <p className="text-blue-100 text-sm">Get help with Sārathi AI Blog Generator</p>
-              </div>
-            </div>
-
-            {/* Help Topics */}
-            <div className="bg-white border border-gray-300 rounded mb-6">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h2 className="font-bold text-sm">Help Topics</h2>
-              </div>
-              <div className="p-4">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {helpTopics.map((topic, index) => (
-                    <div key={index} className="space-y-2">
-                      <h3 className="font-bold text-blue-600 text-sm">{topic.title}</h3>
-                      <ul className="space-y-1">
-                        {topic.items.map((item, i) => (
-                          <li key={i} className="text-sm">
-                            <a href="#" className="text-blue-600 hover:underline">
-                              • {item}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+            
+              <div className="bg-white border border-gray-300 rounded mb-6 w-full">
+                <div className="bg-blue-500 text-white px-4 py-3 rounded-t ">
+                  <h1 className="font-bold text-lg">Help & FAQ</h1>
+                  <p className="text-blue-100 text-sm">Get help with Sārathi AI Blog Generator</p>
                 </div>
               </div>
-            </div>
+            
+
+            {/* Help Topics */}
+            
+              <div className="bg-white border border-gray-300 rounded mb-6 w-full ">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h2 className="font-bold text-sm">Help Topics</h2>
+                </div>
+                <div className="p-4">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {helpTopics.map((topic, index) => (
+                      <div key={index} className="space-y-2">
+                        <h3 className="font-bold text-blue-600 text-sm">{topic.title}</h3>
+                        <ul className="space-y-1">
+                          {topic.items.map((item, i) => (
+                            <li key={i} className="text-sm">
+                              <a href="#" className="text-blue-600 hover:underline">
+                                • {item}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            
 
             {/* FAQ Section */}
             <div className="bg-white border border-gray-300 rounded">
@@ -135,52 +139,56 @@ const HelpFAQ = () => {
           {/* Sidebar */}
           <div className="w-80">
             {/* Quick Help */}
-            <div className="bg-white border border-gray-300 rounded mb-4">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Quick Help</h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-3 text-sm">
-                  <div className="bg-blue-50 border border-blue-200 rounded p-3">
-                    <h4 className="font-bold text-blue-800 mb-1">Need immediate help?</h4>
-                    <p className="text-blue-700">Submit a bug report or feature request using our feedback form.</p>
-                  </div>
-                  <div className="space-y-2">
-                    <a href="#" className="block text-blue-600 hover:underline">
-                      📧 Contact Support
-                    </a>
-                    <a href="#" className="block text-blue-600 hover:underline">
-                      🐛 Report Bug
-                    </a>
-                    <a href="#" className="block text-blue-600 hover:underline">
-                      💡 Feature Request
-                    </a>
-                    <a href="#" className="block text-blue-600 hover:underline">
-                      📖 Documentation
-                    </a>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded mb-4">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Quick Help</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-blue-50 border border-blue-200 rounded p-3">
+                      <h4 className="font-bold text-blue-800 mb-1">Need immediate help?</h4>
+                      <p className="text-blue-700">Submit a bug report or feature request using our feedback form.</p>
+                    </div>
+                    <div className="space-y-2">
+                      <a href="#" className="block text-blue-600 hover:underline">
+                        📧 Contact Support
+                      </a>
+                      <a href="#" className="block text-blue-600 hover:underline">
+                        🐛 Report Bug
+                      </a>
+                      <a href="#" className="block text-blue-600 hover:underline">
+                        💡 Feature Request
+                      </a>
+                      <a href="#" className="block text-blue-600 hover:underline">
+                        📖 Documentation
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Contact Info */}
-            <div className="bg-white border border-gray-300 rounded">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Contact Information</h3>
-              </div>
-              <div className="p-4">
-                <div className="space-y-2 text-sm">
-                  <div>
-                    <span className="text-gray-600">Email:</span>
-                    <span className="ml-2 text-blue-600">support@sarathi.ai</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Response Time:</span>
-                    <span className="ml-2">24-48 hours</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Status:</span>
-                    <span className="ml-2 text-green-600">All systems operational</span>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Contact Information</h3>
+                </div>
+                <div className="p-4">
+                  <div className="space-y-2 text-sm">
+                    <div>
+                      <span className="text-gray-600">Email:</span>
+                      <span className="ml-2 text-blue-600">support@sarathi.ai</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Response Time:</span>
+                      <span className="ml-2">24-48 hours</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-600">Status:</span>
+                      <span className="ml-2 text-green-600">All systems operational</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -518,12 +518,13 @@ const DashboardClassic = () => {
                   <a href="#" className="block text-blue-600 line-through">
                     • RSS feed settings
                   </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    • Report
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    • Help & FAQ
-                  </a>
+                  <Link to="bug-report" className="text-gray-600 hover:text-blue-600">
+                    • BugReport
+                  </Link>  
+              
+                  <Link to="help-faq" className="text-gray-600 hover:text-blue-600">
+                    • Yash
+                  </Link>
                 </div>
               </div>
             </div>

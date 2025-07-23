@@ -4,8 +4,6 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      s
-
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex gap-6">
           {/* Main Content */}
@@ -139,7 +137,7 @@ const AboutPage = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="w-80">
+          <div className="w-80 hidden md:block">
             {/* Quick Stats */}
             <div className="bg-white border border-gray-300 rounded mb-4">
               <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
@@ -191,24 +189,26 @@ const AboutPage = () => {
             </div>
 
             {/* Open Source */}
-            <div className="bg-white border border-gray-300 rounded">
-              <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
-                <h3 className="font-bold text-sm">Open Source</h3>
-              </div>
-              <div className="p-4">
-                <p className="text-sm text-gray-600 mb-3">
-                  Sārathi is built with transparency and community collaboration in mind.
-                </p>
-                <div className="space-y-2 text-sm">
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    🔗 GitHub Repository
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    📋 Contribute
-                  </a>
-                  <a href="#" className="block text-blue-600 hover:underline">
-                    📄 License
-                  </a>
+            <div className="hidden md:block">
+              <div className="bg-white border border-gray-300 rounded">
+                <div className="bg-gray-100 border-b border-gray-300 px-4 py-2">
+                  <h3 className="font-bold text-sm">Open Source</h3>
+                </div>
+                <div className="p-4">
+                  <p className="text-sm text-gray-600 mb-3">
+                    Sārathi is built with transparency and community collaboration in mind.
+                  </p>
+                  <div className="space-y-2 text-sm">
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      🔗 GitHub Repository
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      📋 Contribute
+                    </a>
+                    <a href="#" className="block text-blue-600 hover:underline">
+                      📄 License
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
